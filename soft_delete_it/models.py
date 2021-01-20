@@ -5,10 +5,14 @@ from collections import Counter
 from django.db import (models, router, transaction)
 from django.db.models import signals, sql
 from django.contrib.admin.utils import NestedObjects
-from django.db.models.fields import FieldDoesNotExist
 from django.utils import six
 from operator import attrgetter
 
+''' COMPAT '''
+try:
+    from django.db.models.fields import FieldDoesNotExist
+except ImportError:
+    from django.core.exceptions import FieldDoesNotExist
 
 class SoftDeleteHelper():
     def __init__(self, using='default', delete_type='soft_delete'):
